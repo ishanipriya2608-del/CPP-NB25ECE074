@@ -1,34 +1,33 @@
 #include <iostream>
+using namespace std;
 
 class Order {
 private:
-    static int next_id;  
-    
-    int order_id;      
+    static int nextID;
+    int id;
 
 public:
     Order() {
-        order_id = next_id++;
+        id = nextID++;
     }
 
-    void displayOrder() const {
-        std::cout << "Order placed successfully! Generated ID: " << order_id << "\n";
+    void display() {
+        cout << "Order ID: " << id << endl;
     }
 };
 
-int Order::next_id = 1001;
+int Order::nextID = 1001;
 
 int main() {
-    std::cout << "Creating new orders...\n";
-    
     Order o1;
-    o1.displayOrder();
-
     Order o2;
-    o2.displayOrder();
-
     Order o3;
-    o3.displayOrder();
+    Order o4;
+
+    o1.display();
+    o2.display();
+    o3.display();
+    o4.display();
 
     return 0;
 }

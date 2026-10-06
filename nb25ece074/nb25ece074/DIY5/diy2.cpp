@@ -1,47 +1,44 @@
 #include <iostream>
-#include <iomanip>
+using namespace std;
 
 class Time {
 private:
-    int hh; 
-    int mm; 
-
-    
-
-    int toMinutes() const {
-        return (hh * 60) + mm;
-    }
+    int hh;
+    int mm;
 
 public:
-    Time(int h, int m) : hh(h), mm(m) {}
-
-    void display() const {
-        std::cout << std::setfill('0') << std::setw(2) << hh << ":"
-                  << std::setfill('0') << std::setw(2) << mm << "\n";
+    Time(int h = 0, int m = 0) {
+        hh = h;
+        mm = m;
     }
 
     friend Time laterOf(Time t1, Time t2);
+
+    void display() {
+        cout << hh << ":";
+        if (mm < 10)
+            cout << "0";
+        cout << mm << endl;
+    }
 };
 
 Time laterOf(Time t1, Time t2) {
-    
+    int time1 = t1.hh * 60 + t1.mm;
+    int time2 = t2.hh * 60 + t2.mm;
 
-    if (t1.toMinutes() >= t2.toMinutes()) {
+    if (time1 > time2)
         return t1;
-    } else {
+    else
         return t2;
-    }
 }
 
 int main() {
-    Time time1(14, 30);
-    Time time2(09, 45); 
+    Time t1(10, 30);
+    Time t2(12, 15);
 
-    std::cout << "Time 1: "; time1.display();
-    std::cout << "Time 2: "; time2.display();
+    Time later = laterOf(t1, t2);
 
-    Time later = laterOf(time1, time2);
-    std::cout << "The later time is: ";
+    cout << "Later time: ";
     later.display();
 
     return 0;
